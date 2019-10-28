@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ethnicity** | **string** |  | [optional] 
 **lifted** | **bool** |  | [optional] 
 **country_iso2** | **string** |  | [optional] 
+**ethnicities_top** | **string[]** | List ethnicities (top 10) | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
