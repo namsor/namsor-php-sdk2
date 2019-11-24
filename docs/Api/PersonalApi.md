@@ -355,7 +355,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **genderFull**
-> \OpenAPI\Client\Model\FirstLastNameGenderedOut genderFull($full_name)
+> \OpenAPI\Client\Model\PersonalNameGenderedOut genderFull($full_name)
 
 Infer the likely gender of a full name, ex. John H. Smith
 
@@ -394,7 +394,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\OpenAPI\Client\Model\FirstLastNameGenderedOut**](../Model/FirstLastNameGenderedOut.md)
+[**\OpenAPI\Client\Model\PersonalNameGenderedOut**](../Model/PersonalNameGenderedOut.md)
 
 ### Authorization
 
@@ -461,7 +461,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **genderFullGeo**
-> \OpenAPI\Client\Model\FirstLastNameGenderedOut genderFullGeo($full_name, $country_iso2)
+> \OpenAPI\Client\Model\PersonalNameGenderedOut genderFullGeo($full_name, $country_iso2)
 
 Infer the likely gender of a full name, given a local context (ISO2 country code).
 
@@ -502,7 +502,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\OpenAPI\Client\Model\FirstLastNameGenderedOut**](../Model/FirstLastNameGenderedOut.md)
+[**\OpenAPI\Client\Model\PersonalNameGenderedOut**](../Model/PersonalNameGenderedOut.md)
 
 ### Authorization
 

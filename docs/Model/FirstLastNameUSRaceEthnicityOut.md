@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **race_ethnicity** | **string** | Most likely US &#39;race&#39;/ethnicity | [optional] 
 **score** | **double** | Compatibility to NamSor_v1 Origin score value | [optional] 
 **race_ethnicities_top** | **string[]** | List &#39;race&#39;/ethnicities | [optional] 
+**probability_calibrated** | **double** |  | [optional] 
+**probability_alt_calibrated** | **double** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
