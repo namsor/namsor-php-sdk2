@@ -3,6 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**software_version** | **string** |  | [optional] 
+**host_address** | **string** |  | [optional] 
 **learn_queue_size** | **int** |  | [optional] 
 **buffer_size** | **int** |  | [optional] 
 **pre_classify_queue_size** | **int** |  | [optional] 

@@ -1,6 +1,6 @@
 <?php
 /**
- * NameMatchCandidateOut
+ * CacheMetricsOut
  *
  * PHP version 5
  *
@@ -33,14 +33,15 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * NameMatchCandidateOut Class Doc Comment
+ * CacheMetricsOut Class Doc Comment
  *
  * @category Class
+ * @description Simple metrics system caches
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class NameMatchCandidateOut implements ModelInterface, ArrayAccess
+class CacheMetricsOut implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class NameMatchCandidateOut implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'NameMatchCandidateOut';
+    protected static $openAPIModelName = 'CacheMetricsOut';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,8 @@ class NameMatchCandidateOut implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'candidate_name' => 'string',
-        'probability' => 'double'
+        'cache_name' => 'string',
+        'cache_stats' => 'string'
     ];
 
     /**
@@ -67,8 +68,8 @@ class NameMatchCandidateOut implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'candidate_name' => null,
-        'probability' => 'double'
+        'cache_name' => null,
+        'cache_stats' => null
     ];
 
     /**
@@ -98,8 +99,8 @@ class NameMatchCandidateOut implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'candidate_name' => 'candidateName',
-        'probability' => 'probability'
+        'cache_name' => 'cacheName',
+        'cache_stats' => 'cacheStats'
     ];
 
     /**
@@ -108,8 +109,8 @@ class NameMatchCandidateOut implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'candidate_name' => 'setCandidateName',
-        'probability' => 'setProbability'
+        'cache_name' => 'setCacheName',
+        'cache_stats' => 'setCacheStats'
     ];
 
     /**
@@ -118,8 +119,8 @@ class NameMatchCandidateOut implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'candidate_name' => 'getCandidateName',
-        'probability' => 'getProbability'
+        'cache_name' => 'getCacheName',
+        'cache_stats' => 'getCacheStats'
     ];
 
     /**
@@ -182,8 +183,8 @@ class NameMatchCandidateOut implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['candidate_name'] = isset($data['candidate_name']) ? $data['candidate_name'] : null;
-        $this->container['probability'] = isset($data['probability']) ? $data['probability'] : null;
+        $this->container['cache_name'] = isset($data['cache_name']) ? $data['cache_name'] : null;
+        $this->container['cache_stats'] = isset($data['cache_stats']) ? $data['cache_stats'] : null;
     }
 
     /**
@@ -211,49 +212,49 @@ class NameMatchCandidateOut implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets candidate_name
+     * Gets cache_name
      *
      * @return string|null
      */
-    public function getCandidateName()
+    public function getCacheName()
     {
-        return $this->container['candidate_name'];
+        return $this->container['cache_name'];
     }
 
     /**
-     * Sets candidate_name
+     * Sets cache_name
      *
-     * @param string|null $candidate_name candidate_name
+     * @param string|null $cache_name cache_name
      *
      * @return $this
      */
-    public function setCandidateName($candidate_name)
+    public function setCacheName($cache_name)
     {
-        $this->container['candidate_name'] = $candidate_name;
+        $this->container['cache_name'] = $cache_name;
 
         return $this;
     }
 
     /**
-     * Gets probability
+     * Gets cache_stats
      *
-     * @return double|null
+     * @return string|null
      */
-    public function getProbability()
+    public function getCacheStats()
     {
-        return $this->container['probability'];
+        return $this->container['cache_stats'];
     }
 
     /**
-     * Sets probability
+     * Sets cache_stats
      *
-     * @param double|null $probability probability
+     * @param string|null $cache_stats cache_stats
      *
      * @return $this
      */
-    public function setProbability($probability)
+    public function setCacheStats($cache_stats)
     {
-        $this->container['probability'] = $probability;
+        $this->container['cache_stats'] = $cache_stats;
 
         return $this;
     }

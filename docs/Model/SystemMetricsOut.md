@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**cache_metrics** | [**\OpenAPI\Client\Model\CacheMetricsOut[]**](CacheMetricsOut.md) |  | [optional] 
 **classifier_metrics** | [**\OpenAPI\Client\Model\ClassifierMetricsOut[]**](ClassifierMetricsOut.md) |  | [optional] 
 **source_metrics** | [**\OpenAPI\Client\Model\SourceMetricsOut[]**](SourceMetricsOut.md) |  | [optional] 
 **total_mem** | **int** |  | [optional] 

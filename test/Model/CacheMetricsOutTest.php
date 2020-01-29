@@ -1,6 +1,6 @@
 <?php
 /**
- * NameMatchedOutTest
+ * CacheMetricsOutTest
  *
  * PHP version 5
  *
@@ -32,15 +32,15 @@ namespace OpenAPI\Client;
 use PHPUnit\Framework\TestCase;
 
 /**
- * NameMatchedOutTest Class Doc Comment
+ * CacheMetricsOutTest Class Doc Comment
  *
  * @category    Class
- * @description NameMatchedOut
+ * @description Simple metrics system caches
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class NameMatchedOutTest extends TestCase
+class CacheMetricsOutTest extends TestCase
 {
 
     /**
@@ -72,30 +72,23 @@ class NameMatchedOutTest extends TestCase
     }
 
     /**
-     * Test "NameMatchedOut"
+     * Test "CacheMetricsOut"
      */
-    public function testNameMatchedOut()
+    public function testCacheMetricsOut()
     {
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "cache_name"
      */
-    public function testPropertyId()
+    public function testPropertyCacheName()
     {
     }
 
     /**
-     * Test attribute "match_status"
+     * Test attribute "cache_stats"
      */
-    public function testPropertyMatchStatus()
-    {
-    }
-
-    /**
-     * Test attribute "score"
-     */
-    public function testPropertyScore()
+    public function testPropertyCacheStats()
     {
     }
 }
