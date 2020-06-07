@@ -10,8 +10,8 @@ Method | HTTP request | Description
 [**apiUsage**](AdminApi.md#apiUsage) | **GET** /api2/json/apiUsage | Print current API usage.
 [**apiUsageHistory**](AdminApi.md#apiUsageHistory) | **GET** /api2/json/apiUsageHistory | Print historical API usage.
 [**apiUsageHistoryAggregate**](AdminApi.md#apiUsageHistoryAggregate) | **GET** /api2/json/apiUsageHistoryAggregate | Print historical API usage (in an aggregated view, by service, by day/hour/min).
-[**availablePlans**](AdminApi.md#availablePlans) | **GET** /api2/json/availablePlans/{token} | List all available plans in the user&#39;s preferred currency.
-[**availablePlans1**](AdminApi.md#availablePlans1) | **GET** /api2/json/availablePlans | List all available plans in the default currency (usd).
+[**availablePlans**](AdminApi.md#availablePlans) | **GET** /api2/json/availablePlans | List all available plans in the default currency (usd).
+[**availablePlans1**](AdminApi.md#availablePlans1) | **GET** /api2/json/availablePlans/{token} | List all available plans in the user&#39;s preferred currency.
 [**availableServices**](AdminApi.md#availableServices) | **GET** /api2/json/apiServices | List of API services and usage cost in Units (default is 1&#x3D;ONE Unit).
 [**billingCurrencies**](AdminApi.md#billingCurrencies) | **GET** /api2/json/billingCurrencies | List possible currency options for billing (USD, EUR, GBP, ...)
 [**billingHistory**](AdminApi.md#billingHistory) | **GET** /api2/json/billingHistory/{token} | Read the history billing information (invoices paid via Stripe or manually).
@@ -25,8 +25,8 @@ Method | HTTP request | Description
 [**namsorCounter**](AdminApi.md#namsorCounter) | **GET** /api2/json/namsorCounter | Get the overall API counter
 [**paymentInfo**](AdminApi.md#paymentInfo) | **GET** /api2/json/paymentInfo/{token} | Get the Stripe payment information associated with the current google auth session token.
 [**procureKey**](AdminApi.md#procureKey) | **GET** /api2/json/procureKey/{token} | Procure an API Key (sent via Email), based on an auth token. Keep your API Key secret.
-[**redeployUI**](AdminApi.md#redeployUI) | **GET** /api2/json/redeployUI/{live} | Redeploy UI from current dev branch.
-[**redeployUI1**](AdminApi.md#redeployUI1) | **GET** /api2/json/redeployUI | Redeploy UI from current dev branch.
+[**redeployUI**](AdminApi.md#redeployUI) | **GET** /api2/json/redeployUI | Redeploy UI from current dev branch.
+[**redeployUI1**](AdminApi.md#redeployUI1) | **GET** /api2/json/redeployUI/{live} | Redeploy UI from current dev branch.
 [**removeUserAccount**](AdminApi.md#removeUserAccount) | **GET** /api2/json/removeUserAccount/{token} | Remove the user account.
 [**removeUserAccountOnBehalf**](AdminApi.md#removeUserAccountOnBehalf) | **GET** /api2/json/removeUserAccountOnBehalf/{apiKey} | Remove (on behalf) a user account.
 [**shutdown**](AdminApi.md#shutdown) | **GET** /api2/json/shutdown | Stop learning and shutdown system.
@@ -354,7 +354,56 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **availablePlans**
-> \OpenAPI\Client\Model\APIPlansOut availablePlans($token)
+> \OpenAPI\Client\Model\APIPlansOut availablePlans()
+
+List all available plans in the default currency (usd).
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: api_key
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+$apiInstance = new OpenAPI\Client\Api\AdminApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->availablePlans();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling AdminApi->availablePlans: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**\OpenAPI\Client\Model\APIPlansOut**](../Model/APIPlansOut.md)
+
+### Authorization
+
+[api_key](../../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **availablePlans1**
+> \OpenAPI\Client\Model\APIPlansOut availablePlans1($token)
 
 List all available plans in the user's preferred currency.
 
@@ -377,10 +426,10 @@ $apiInstance = new OpenAPI\Client\Api\AdminApi(
 $token = 'token_example'; // string | 
 
 try {
-    $result = $apiInstance->availablePlans($token);
+    $result = $apiInstance->availablePlans1($token);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling AdminApi->availablePlans: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AdminApi->availablePlans1: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -390,55 +439,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **token** | **string**|  |
-
-### Return type
-
-[**\OpenAPI\Client\Model\APIPlansOut**](../Model/APIPlansOut.md)
-
-### Authorization
-
-[api_key](../../README.md#api_key)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-# **availablePlans1**
-> \OpenAPI\Client\Model\APIPlansOut availablePlans1()
-
-List all available plans in the default currency (usd).
-
-### Example
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure API key authorization: api_key
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-$apiInstance = new OpenAPI\Client\Api\AdminApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-
-try {
-    $result = $apiInstance->availablePlans1();
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling AdminApi->availablePlans1: ', $e->getMessage(), PHP_EOL;
-}
-?>
-```
-
-### Parameters
-This endpoint does not need any parameter.
 
 ### Return type
 
@@ -1126,7 +1126,55 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **redeployUI**
-> redeployUI($live)
+> redeployUI()
+
+Redeploy UI from current dev branch.
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure API key authorization: api_key
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
+
+$apiInstance = new OpenAPI\Client\Api\AdminApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $apiInstance->redeployUI();
+} catch (Exception $e) {
+    echo 'Exception when calling AdminApi->redeployUI: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api_key](../../README.md#api_key)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **redeployUI1**
+> redeployUI1($live)
 
 Redeploy UI from current dev branch.
 
@@ -1149,9 +1197,9 @@ $apiInstance = new OpenAPI\Client\Api\AdminApi(
 $live = True; // bool | 
 
 try {
-    $apiInstance->redeployUI($live);
+    $apiInstance->redeployUI1($live);
 } catch (Exception $e) {
-    echo 'Exception when calling AdminApi->redeployUI: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling AdminApi->redeployUI1: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -1161,54 +1209,6 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **live** | **bool**|  |
-
-### Return type
-
-void (empty response body)
-
-### Authorization
-
-[api_key](../../README.md#api_key)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: Not defined
-
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
-
-# **redeployUI1**
-> redeployUI1()
-
-Redeploy UI from current dev branch.
-
-### Example
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-// Configure API key authorization: api_key
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKey('X-API-KEY', 'YOUR_API_KEY');
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-// $config = OpenAPI\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('X-API-KEY', 'Bearer');
-
-$apiInstance = new OpenAPI\Client\Api\AdminApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client(),
-    $config
-);
-
-try {
-    $apiInstance->redeployUI1();
-} catch (Exception $e) {
-    echo 'Exception when calling AdminApi->redeployUI1: ', $e->getMessage(), PHP_EOL;
-}
-?>
-```
-
-### Parameters
-This endpoint does not need any parameter.
 
 ### Return type
 

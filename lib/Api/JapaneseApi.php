@@ -1,6 +1,6 @@
 <?php
 /**
- * ChineseApi
+ * JapaneseApi
  * PHP version 5
  *
  * @category Class
@@ -40,14 +40,14 @@ use OpenAPI\Client\HeaderSelector;
 use OpenAPI\Client\ObjectSerializer;
 
 /**
- * ChineseApi Class Doc Comment
+ * JapaneseApi Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ChineseApi
+class JapaneseApi
 {
     /**
      * @var ClientInterface
@@ -88,1760 +88,36 @@ class ChineseApi
     }
 
     /**
-     * Operation chineseNameCandidates
+     * Operation genderJapaneseNameFull
      *
-     * Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming
+     * Infer the likely gender of a Japanese full name ex. 王晓明
      *
-     * @param  string $chinese_surname_latin chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin chinese_given_name_latin (required)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\RomanizedNameOut
-     */
-    public function chineseNameCandidates($chinese_surname_latin, $chinese_given_name_latin)
-    {
-        list($response) = $this->chineseNameCandidatesWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin);
-        return $response;
-    }
-
-    /**
-     * Operation chineseNameCandidatesWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\RomanizedNameOut, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function chineseNameCandidatesWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin)
-    {
-        $request = $this->chineseNameCandidatesRequest($chinese_surname_latin, $chinese_given_name_latin);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 200:
-                    if ('\OpenAPI\Client\Model\RomanizedNameOut' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\RomanizedNameOut', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\RomanizedNameOut',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation chineseNameCandidatesAsync
-     *
-     * Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameCandidatesAsync($chinese_surname_latin, $chinese_given_name_latin)
-    {
-        return $this->chineseNameCandidatesAsyncWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation chineseNameCandidatesAsyncWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameCandidatesAsyncWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin)
-    {
-        $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
-        $request = $this->chineseNameCandidatesRequest($chinese_surname_latin, $chinese_given_name_latin);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'chineseNameCandidates'
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function chineseNameCandidatesRequest($chinese_surname_latin, $chinese_given_name_latin)
-    {
-        // verify the required parameter 'chinese_surname_latin' is set
-        if ($chinese_surname_latin === null || (is_array($chinese_surname_latin) && count($chinese_surname_latin) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_surname_latin when calling chineseNameCandidates'
-            );
-        }
-        // verify the required parameter 'chinese_given_name_latin' is set
-        if ($chinese_given_name_latin === null || (is_array($chinese_given_name_latin) && count($chinese_given_name_latin) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_given_name_latin when calling chineseNameCandidates'
-            );
-        }
-
-        $resourcePath = '/api2/json/chineseNameCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // path params
-        if ($chinese_surname_latin !== null) {
-            $resourcePath = str_replace(
-                '{' . 'chineseSurnameLatin' . '}',
-                ObjectSerializer::toPathValue($chinese_surname_latin),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($chinese_given_name_latin !== null) {
-            $resourcePath = str_replace(
-                '{' . 'chineseGivenNameLatin' . '}',
-                ObjectSerializer::toPathValue($chinese_given_name_latin),
-                $resourcePath
-            );
-        }
-
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation chineseNameCandidatesBatch
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\BatchNameMatchCandidatesOut
-     */
-    public function chineseNameCandidatesBatch($batch_first_last_name_in = null)
-    {
-        list($response) = $this->chineseNameCandidatesBatchWithHttpInfo($batch_first_last_name_in);
-        return $response;
-    }
-
-    /**
-     * Operation chineseNameCandidatesBatchWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\BatchNameMatchCandidatesOut, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function chineseNameCandidatesBatchWithHttpInfo($batch_first_last_name_in = null)
-    {
-        $request = $this->chineseNameCandidatesBatchRequest($batch_first_last_name_in);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 200:
-                    if ('\OpenAPI\Client\Model\BatchNameMatchCandidatesOut' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation chineseNameCandidatesBatchAsync
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameCandidatesBatchAsync($batch_first_last_name_in = null)
-    {
-        return $this->chineseNameCandidatesBatchAsyncWithHttpInfo($batch_first_last_name_in)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation chineseNameCandidatesBatchAsyncWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameCandidatesBatchAsyncWithHttpInfo($batch_first_last_name_in = null)
-    {
-        $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
-        $request = $this->chineseNameCandidatesBatchRequest($batch_first_last_name_in);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'chineseNameCandidatesBatch'
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function chineseNameCandidatesBatchRequest($batch_first_last_name_in = null)
-    {
-
-        $resourcePath = '/api2/json/chineseNameCandidatesBatch';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // body params
-        $_tempBody = null;
-        if (isset($batch_first_last_name_in)) {
-            $_tempBody = $batch_first_last_name_in;
-        }
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'POST',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation chineseNameCandidatesGenderBatch
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang Xiaoming.
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\BatchNameMatchCandidatesOut
-     */
-    public function chineseNameCandidatesGenderBatch($batch_first_last_name_in = null)
-    {
-        list($response) = $this->chineseNameCandidatesGenderBatchWithHttpInfo($batch_first_last_name_in);
-        return $response;
-    }
-
-    /**
-     * Operation chineseNameCandidatesGenderBatchWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang Xiaoming.
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\BatchNameMatchCandidatesOut, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function chineseNameCandidatesGenderBatchWithHttpInfo($batch_first_last_name_in = null)
-    {
-        $request = $this->chineseNameCandidatesGenderBatchRequest($batch_first_last_name_in);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 200:
-                    if ('\OpenAPI\Client\Model\BatchNameMatchCandidatesOut' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation chineseNameCandidatesGenderBatchAsync
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang Xiaoming.
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameCandidatesGenderBatchAsync($batch_first_last_name_in = null)
-    {
-        return $this->chineseNameCandidatesGenderBatchAsyncWithHttpInfo($batch_first_last_name_in)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation chineseNameCandidatesGenderBatchAsyncWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname) ex. Wang Xiaoming.
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameCandidatesGenderBatchAsyncWithHttpInfo($batch_first_last_name_in = null)
-    {
-        $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
-        $request = $this->chineseNameCandidatesGenderBatchRequest($batch_first_last_name_in);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'chineseNameCandidatesGenderBatch'
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function chineseNameCandidatesGenderBatchRequest($batch_first_last_name_in = null)
-    {
-
-        $resourcePath = '/api2/json/chineseNameCandidatesGenderBatch';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // body params
-        $_tempBody = null;
-        if (isset($batch_first_last_name_in)) {
-            $_tempBody = $batch_first_last_name_in;
-        }
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'POST',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation chineseNameGenderCandidates
-     *
-     * Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming - having a known gender ('male' or 'female')
-     *
-     * @param  string $chinese_surname_latin chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin chinese_given_name_latin (required)
-     * @param  string $known_gender known_gender (required)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\RomanizedNameOut
-     */
-    public function chineseNameGenderCandidates($chinese_surname_latin, $chinese_given_name_latin, $known_gender)
-    {
-        list($response) = $this->chineseNameGenderCandidatesWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin, $known_gender);
-        return $response;
-    }
-
-    /**
-     * Operation chineseNameGenderCandidatesWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming - having a known gender ('male' or 'female')
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     * @param  string $known_gender (required)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\RomanizedNameOut, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function chineseNameGenderCandidatesWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin, $known_gender)
-    {
-        $request = $this->chineseNameGenderCandidatesRequest($chinese_surname_latin, $chinese_given_name_latin, $known_gender);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 200:
-                    if ('\OpenAPI\Client\Model\RomanizedNameOut' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\RomanizedNameOut', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\RomanizedNameOut',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation chineseNameGenderCandidatesAsync
-     *
-     * Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming - having a known gender ('male' or 'female')
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     * @param  string $known_gender (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameGenderCandidatesAsync($chinese_surname_latin, $chinese_given_name_latin, $known_gender)
-    {
-        return $this->chineseNameGenderCandidatesAsyncWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin, $known_gender)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation chineseNameGenderCandidatesAsyncWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name ex. Wang Xiaoming - having a known gender ('male' or 'female')
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     * @param  string $known_gender (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameGenderCandidatesAsyncWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin, $known_gender)
-    {
-        $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
-        $request = $this->chineseNameGenderCandidatesRequest($chinese_surname_latin, $chinese_given_name_latin, $known_gender);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'chineseNameGenderCandidates'
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     * @param  string $known_gender (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function chineseNameGenderCandidatesRequest($chinese_surname_latin, $chinese_given_name_latin, $known_gender)
-    {
-        // verify the required parameter 'chinese_surname_latin' is set
-        if ($chinese_surname_latin === null || (is_array($chinese_surname_latin) && count($chinese_surname_latin) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_surname_latin when calling chineseNameGenderCandidates'
-            );
-        }
-        // verify the required parameter 'chinese_given_name_latin' is set
-        if ($chinese_given_name_latin === null || (is_array($chinese_given_name_latin) && count($chinese_given_name_latin) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_given_name_latin when calling chineseNameGenderCandidates'
-            );
-        }
-        // verify the required parameter 'known_gender' is set
-        if ($known_gender === null || (is_array($known_gender) && count($known_gender) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $known_gender when calling chineseNameGenderCandidates'
-            );
-        }
-
-        $resourcePath = '/api2/json/chineseNameGenderCandidates/{chineseSurnameLatin}/{chineseGivenNameLatin}/{knownGender}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // path params
-        if ($chinese_surname_latin !== null) {
-            $resourcePath = str_replace(
-                '{' . 'chineseSurnameLatin' . '}',
-                ObjectSerializer::toPathValue($chinese_surname_latin),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($chinese_given_name_latin !== null) {
-            $resourcePath = str_replace(
-                '{' . 'chineseGivenNameLatin' . '}',
-                ObjectSerializer::toPathValue($chinese_given_name_latin),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($known_gender !== null) {
-            $resourcePath = str_replace(
-                '{' . 'knownGender' . '}',
-                ObjectSerializer::toPathValue($known_gender),
-                $resourcePath
-            );
-        }
-
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation chineseNameMatch
-     *
-     * Return a score for matching Chinese name ex. 王晓明 with a romanized name ex. Wang Xiaoming
-     *
-     * @param  string $chinese_surname_latin chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin chinese_given_name_latin (required)
-     * @param  string $chinese_name chinese_name (required)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\RomanizedNameOut
-     */
-    public function chineseNameMatch($chinese_surname_latin, $chinese_given_name_latin, $chinese_name)
-    {
-        list($response) = $this->chineseNameMatchWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin, $chinese_name);
-        return $response;
-    }
-
-    /**
-     * Operation chineseNameMatchWithHttpInfo
-     *
-     * Return a score for matching Chinese name ex. 王晓明 with a romanized name ex. Wang Xiaoming
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     * @param  string $chinese_name (required)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\RomanizedNameOut, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function chineseNameMatchWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin, $chinese_name)
-    {
-        $request = $this->chineseNameMatchRequest($chinese_surname_latin, $chinese_given_name_latin, $chinese_name);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 200:
-                    if ('\OpenAPI\Client\Model\RomanizedNameOut' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\RomanizedNameOut', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\RomanizedNameOut',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation chineseNameMatchAsync
-     *
-     * Return a score for matching Chinese name ex. 王晓明 with a romanized name ex. Wang Xiaoming
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     * @param  string $chinese_name (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameMatchAsync($chinese_surname_latin, $chinese_given_name_latin, $chinese_name)
-    {
-        return $this->chineseNameMatchAsyncWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin, $chinese_name)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation chineseNameMatchAsyncWithHttpInfo
-     *
-     * Return a score for matching Chinese name ex. 王晓明 with a romanized name ex. Wang Xiaoming
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     * @param  string $chinese_name (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameMatchAsyncWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin, $chinese_name)
-    {
-        $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
-        $request = $this->chineseNameMatchRequest($chinese_surname_latin, $chinese_given_name_latin, $chinese_name);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'chineseNameMatch'
-     *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
-     * @param  string $chinese_name (required)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function chineseNameMatchRequest($chinese_surname_latin, $chinese_given_name_latin, $chinese_name)
-    {
-        // verify the required parameter 'chinese_surname_latin' is set
-        if ($chinese_surname_latin === null || (is_array($chinese_surname_latin) && count($chinese_surname_latin) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_surname_latin when calling chineseNameMatch'
-            );
-        }
-        // verify the required parameter 'chinese_given_name_latin' is set
-        if ($chinese_given_name_latin === null || (is_array($chinese_given_name_latin) && count($chinese_given_name_latin) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_given_name_latin when calling chineseNameMatch'
-            );
-        }
-        // verify the required parameter 'chinese_name' is set
-        if ($chinese_name === null || (is_array($chinese_name) && count($chinese_name) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_name when calling chineseNameMatch'
-            );
-        }
-
-        $resourcePath = '/api2/json/chineseNameMatch/{chineseSurnameLatin}/{chineseGivenNameLatin}/{chineseName}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-        // path params
-        if ($chinese_surname_latin !== null) {
-            $resourcePath = str_replace(
-                '{' . 'chineseSurnameLatin' . '}',
-                ObjectSerializer::toPathValue($chinese_surname_latin),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($chinese_given_name_latin !== null) {
-            $resourcePath = str_replace(
-                '{' . 'chineseGivenNameLatin' . '}',
-                ObjectSerializer::toPathValue($chinese_given_name_latin),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($chinese_name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'chineseName' . '}',
-                ObjectSerializer::toPathValue($chinese_name),
-                $resourcePath
-            );
-        }
-
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                []
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation chineseNameMatchBatch
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\BatchNameMatchCandidatesOut
-     */
-    public function chineseNameMatchBatch($batch_first_last_name_in = null)
-    {
-        list($response) = $this->chineseNameMatchBatchWithHttpInfo($batch_first_last_name_in);
-        return $response;
-    }
-
-    /**
-     * Operation chineseNameMatchBatchWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\BatchNameMatchCandidatesOut, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function chineseNameMatchBatchWithHttpInfo($batch_first_last_name_in = null)
-    {
-        $request = $this->chineseNameMatchBatchRequest($batch_first_last_name_in);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 200:
-                    if ('\OpenAPI\Client\Model\BatchNameMatchCandidatesOut' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation chineseNameMatchBatchAsync
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameMatchBatchAsync($batch_first_last_name_in = null)
-    {
-        return $this->chineseNameMatchBatchAsyncWithHttpInfo($batch_first_last_name_in)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation chineseNameMatchBatchAsyncWithHttpInfo
-     *
-     * Identify Chinese name candidates, based on the romanized name (firstName = chineseGivenName; lastName=chineseSurname), ex. Wang Xiaoming
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function chineseNameMatchBatchAsyncWithHttpInfo($batch_first_last_name_in = null)
-    {
-        $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
-        $request = $this->chineseNameMatchBatchRequest($batch_first_last_name_in);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'chineseNameMatchBatch'
-     *
-     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Chinese names in LATIN, firstName &#x3D; chineseGivenName; lastName&#x3D;chineseSurname (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function chineseNameMatchBatchRequest($batch_first_last_name_in = null)
-    {
-
-        $resourcePath = '/api2/json/chineseNameMatchBatch';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // body params
-        $_tempBody = null;
-        if (isset($batch_first_last_name_in)) {
-            $_tempBody = $batch_first_last_name_in;
-        }
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-        // this endpoint requires API key authentication
-        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
-        if ($apiKey !== null) {
-            $headers['X-API-KEY'] = $apiKey;
-        }
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'POST',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation genderChineseName
-     *
-     * Infer the likely gender of a Chinese full name ex. 王晓明
-     *
-     * @param  string $chinese_name chinese_name (required)
+     * @param  string $japanese_name japanese_name (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\PersonalNameGenderedOut
      */
-    public function genderChineseName($chinese_name)
+    public function genderJapaneseNameFull($japanese_name)
     {
-        list($response) = $this->genderChineseNameWithHttpInfo($chinese_name);
+        list($response) = $this->genderJapaneseNameFullWithHttpInfo($japanese_name);
         return $response;
     }
 
     /**
-     * Operation genderChineseNameWithHttpInfo
+     * Operation genderJapaneseNameFullWithHttpInfo
      *
-     * Infer the likely gender of a Chinese full name ex. 王晓明
+     * Infer the likely gender of a Japanese full name ex. 王晓明
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_name (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\PersonalNameGenderedOut, HTTP status code, HTTP response headers (array of strings)
      */
-    public function genderChineseNameWithHttpInfo($chinese_name)
+    public function genderJapaneseNameFullWithHttpInfo($japanese_name)
     {
-        $request = $this->genderChineseNameRequest($chinese_name);
+        $request = $this->genderJapaneseNameFullRequest($japanese_name);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1917,18 +193,18 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNameAsync
+     * Operation genderJapaneseNameFullAsync
      *
-     * Infer the likely gender of a Chinese full name ex. 王晓明
+     * Infer the likely gender of a Japanese full name ex. 王晓明
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function genderChineseNameAsync($chinese_name)
+    public function genderJapaneseNameFullAsync($japanese_name)
     {
-        return $this->genderChineseNameAsyncWithHttpInfo($chinese_name)
+        return $this->genderJapaneseNameFullAsyncWithHttpInfo($japanese_name)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1937,19 +213,19 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNameAsyncWithHttpInfo
+     * Operation genderJapaneseNameFullAsyncWithHttpInfo
      *
-     * Infer the likely gender of a Chinese full name ex. 王晓明
+     * Infer the likely gender of a Japanese full name ex. 王晓明
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function genderChineseNameAsyncWithHttpInfo($chinese_name)
+    public function genderJapaneseNameFullAsyncWithHttpInfo($japanese_name)
     {
         $returnType = '\OpenAPI\Client\Model\PersonalNameGenderedOut';
-        $request = $this->genderChineseNameRequest($chinese_name);
+        $request = $this->genderJapaneseNameFullRequest($japanese_name);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1986,23 +262,23 @@ class ChineseApi
     }
 
     /**
-     * Create request for operation 'genderChineseName'
+     * Create request for operation 'genderJapaneseNameFull'
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function genderChineseNameRequest($chinese_name)
+    protected function genderJapaneseNameFullRequest($japanese_name)
     {
-        // verify the required parameter 'chinese_name' is set
-        if ($chinese_name === null || (is_array($chinese_name) && count($chinese_name) === 0)) {
+        // verify the required parameter 'japanese_name' is set
+        if ($japanese_name === null || (is_array($japanese_name) && count($japanese_name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_name when calling genderChineseName'
+                'Missing the required parameter $japanese_name when calling genderJapaneseNameFull'
             );
         }
 
-        $resourcePath = '/api2/json/genderChineseName/{chineseName}';
+        $resourcePath = '/api2/json/genderJapaneseNameFull/{japaneseName}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2011,10 +287,10 @@ class ChineseApi
 
 
         // path params
-        if ($chinese_name !== null) {
+        if ($japanese_name !== null) {
             $resourcePath = str_replace(
-                '{' . 'chineseName' . '}',
-                ObjectSerializer::toPathValue($chinese_name),
+                '{' . 'japaneseName' . '}',
+                ObjectSerializer::toPathValue($japanese_name),
                 $resourcePath
             );
         }
@@ -2089,36 +365,36 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNameBatch
+     * Operation genderJapaneseNameFullBatch
      *
-     * Infer the likely gender of up to 100 full names ex. 王晓明
+     * Infer the likely gender of up to 100 full names
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names, with a country ISO2 code (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\BatchPersonalNameGenderedOut
      */
-    public function genderChineseNameBatch($batch_personal_name_in = null)
+    public function genderJapaneseNameFullBatch($batch_personal_name_in = null)
     {
-        list($response) = $this->genderChineseNameBatchWithHttpInfo($batch_personal_name_in);
+        list($response) = $this->genderJapaneseNameFullBatchWithHttpInfo($batch_personal_name_in);
         return $response;
     }
 
     /**
-     * Operation genderChineseNameBatchWithHttpInfo
+     * Operation genderJapaneseNameFullBatchWithHttpInfo
      *
-     * Infer the likely gender of up to 100 full names ex. 王晓明
+     * Infer the likely gender of up to 100 full names
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names, with a country ISO2 code (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\BatchPersonalNameGenderedOut, HTTP status code, HTTP response headers (array of strings)
      */
-    public function genderChineseNameBatchWithHttpInfo($batch_personal_name_in = null)
+    public function genderJapaneseNameFullBatchWithHttpInfo($batch_personal_name_in = null)
     {
-        $request = $this->genderChineseNameBatchRequest($batch_personal_name_in);
+        $request = $this->genderJapaneseNameFullBatchRequest($batch_personal_name_in);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2194,18 +470,18 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNameBatchAsync
+     * Operation genderJapaneseNameFullBatchAsync
      *
-     * Infer the likely gender of up to 100 full names ex. 王晓明
+     * Infer the likely gender of up to 100 full names
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names, with a country ISO2 code (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function genderChineseNameBatchAsync($batch_personal_name_in = null)
+    public function genderJapaneseNameFullBatchAsync($batch_personal_name_in = null)
     {
-        return $this->genderChineseNameBatchAsyncWithHttpInfo($batch_personal_name_in)
+        return $this->genderJapaneseNameFullBatchAsyncWithHttpInfo($batch_personal_name_in)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2214,19 +490,19 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNameBatchAsyncWithHttpInfo
+     * Operation genderJapaneseNameFullBatchAsyncWithHttpInfo
      *
-     * Infer the likely gender of up to 100 full names ex. 王晓明
+     * Infer the likely gender of up to 100 full names
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names, with a country ISO2 code (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function genderChineseNameBatchAsyncWithHttpInfo($batch_personal_name_in = null)
+    public function genderJapaneseNameFullBatchAsyncWithHttpInfo($batch_personal_name_in = null)
     {
         $returnType = '\OpenAPI\Client\Model\BatchPersonalNameGenderedOut';
-        $request = $this->genderChineseNameBatchRequest($batch_personal_name_in);
+        $request = $this->genderJapaneseNameFullBatchRequest($batch_personal_name_in);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2263,17 +539,17 @@ class ChineseApi
     }
 
     /**
-     * Create request for operation 'genderChineseNameBatch'
+     * Create request for operation 'genderJapaneseNameFullBatch'
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names, with a country ISO2 code (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function genderChineseNameBatchRequest($batch_personal_name_in = null)
+    protected function genderJapaneseNameFullBatchRequest($batch_personal_name_in = null)
     {
 
-        $resourcePath = '/api2/json/genderChineseNameBatch';
+        $resourcePath = '/api2/json/genderJapaneseNameFullBatch';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2355,38 +631,38 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNamePinyin
+     * Operation genderJapaneseNamePinyin
      *
-     * Infer the likely gender of a Chinese name in LATIN (Pinyin).
+     * Infer the likely gender of a Japanese name in LATIN (Pinyin).
      *
-     * @param  string $chinese_surname_latin chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin chinese_given_name_latin (required)
+     * @param  string $japanese_surname japanese_surname (required)
+     * @param  string $japanese_given_name japanese_given_name (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\FirstLastNameGenderedOut
      */
-    public function genderChineseNamePinyin($chinese_surname_latin, $chinese_given_name_latin)
+    public function genderJapaneseNamePinyin($japanese_surname, $japanese_given_name)
     {
-        list($response) = $this->genderChineseNamePinyinWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin);
+        list($response) = $this->genderJapaneseNamePinyinWithHttpInfo($japanese_surname, $japanese_given_name);
         return $response;
     }
 
     /**
-     * Operation genderChineseNamePinyinWithHttpInfo
+     * Operation genderJapaneseNamePinyinWithHttpInfo
      *
-     * Infer the likely gender of a Chinese name in LATIN (Pinyin).
+     * Infer the likely gender of a Japanese name in LATIN (Pinyin).
      *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
+     * @param  string $japanese_surname (required)
+     * @param  string $japanese_given_name (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\FirstLastNameGenderedOut, HTTP status code, HTTP response headers (array of strings)
      */
-    public function genderChineseNamePinyinWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin)
+    public function genderJapaneseNamePinyinWithHttpInfo($japanese_surname, $japanese_given_name)
     {
-        $request = $this->genderChineseNamePinyinRequest($chinese_surname_latin, $chinese_given_name_latin);
+        $request = $this->genderJapaneseNamePinyinRequest($japanese_surname, $japanese_given_name);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2462,19 +738,19 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNamePinyinAsync
+     * Operation genderJapaneseNamePinyinAsync
      *
-     * Infer the likely gender of a Chinese name in LATIN (Pinyin).
+     * Infer the likely gender of a Japanese name in LATIN (Pinyin).
      *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
+     * @param  string $japanese_surname (required)
+     * @param  string $japanese_given_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function genderChineseNamePinyinAsync($chinese_surname_latin, $chinese_given_name_latin)
+    public function genderJapaneseNamePinyinAsync($japanese_surname, $japanese_given_name)
     {
-        return $this->genderChineseNamePinyinAsyncWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin)
+        return $this->genderJapaneseNamePinyinAsyncWithHttpInfo($japanese_surname, $japanese_given_name)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2483,20 +759,20 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNamePinyinAsyncWithHttpInfo
+     * Operation genderJapaneseNamePinyinAsyncWithHttpInfo
      *
-     * Infer the likely gender of a Chinese name in LATIN (Pinyin).
+     * Infer the likely gender of a Japanese name in LATIN (Pinyin).
      *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
+     * @param  string $japanese_surname (required)
+     * @param  string $japanese_given_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function genderChineseNamePinyinAsyncWithHttpInfo($chinese_surname_latin, $chinese_given_name_latin)
+    public function genderJapaneseNamePinyinAsyncWithHttpInfo($japanese_surname, $japanese_given_name)
     {
         $returnType = '\OpenAPI\Client\Model\FirstLastNameGenderedOut';
-        $request = $this->genderChineseNamePinyinRequest($chinese_surname_latin, $chinese_given_name_latin);
+        $request = $this->genderJapaneseNamePinyinRequest($japanese_surname, $japanese_given_name);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2533,30 +809,30 @@ class ChineseApi
     }
 
     /**
-     * Create request for operation 'genderChineseNamePinyin'
+     * Create request for operation 'genderJapaneseNamePinyin'
      *
-     * @param  string $chinese_surname_latin (required)
-     * @param  string $chinese_given_name_latin (required)
+     * @param  string $japanese_surname (required)
+     * @param  string $japanese_given_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function genderChineseNamePinyinRequest($chinese_surname_latin, $chinese_given_name_latin)
+    protected function genderJapaneseNamePinyinRequest($japanese_surname, $japanese_given_name)
     {
-        // verify the required parameter 'chinese_surname_latin' is set
-        if ($chinese_surname_latin === null || (is_array($chinese_surname_latin) && count($chinese_surname_latin) === 0)) {
+        // verify the required parameter 'japanese_surname' is set
+        if ($japanese_surname === null || (is_array($japanese_surname) && count($japanese_surname) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_surname_latin when calling genderChineseNamePinyin'
+                'Missing the required parameter $japanese_surname when calling genderJapaneseNamePinyin'
             );
         }
-        // verify the required parameter 'chinese_given_name_latin' is set
-        if ($chinese_given_name_latin === null || (is_array($chinese_given_name_latin) && count($chinese_given_name_latin) === 0)) {
+        // verify the required parameter 'japanese_given_name' is set
+        if ($japanese_given_name === null || (is_array($japanese_given_name) && count($japanese_given_name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_given_name_latin when calling genderChineseNamePinyin'
+                'Missing the required parameter $japanese_given_name when calling genderJapaneseNamePinyin'
             );
         }
 
-        $resourcePath = '/api2/json/genderChineseNamePinyin/{chineseSurnameLatin}/{chineseGivenNameLatin}';
+        $resourcePath = '/api2/json/genderJapaneseName/{japaneseSurname}/{japaneseGivenName}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2565,18 +841,18 @@ class ChineseApi
 
 
         // path params
-        if ($chinese_surname_latin !== null) {
+        if ($japanese_surname !== null) {
             $resourcePath = str_replace(
-                '{' . 'chineseSurnameLatin' . '}',
-                ObjectSerializer::toPathValue($chinese_surname_latin),
+                '{' . 'japaneseSurname' . '}',
+                ObjectSerializer::toPathValue($japanese_surname),
                 $resourcePath
             );
         }
         // path params
-        if ($chinese_given_name_latin !== null) {
+        if ($japanese_given_name !== null) {
             $resourcePath = str_replace(
-                '{' . 'chineseGivenNameLatin' . '}',
-                ObjectSerializer::toPathValue($chinese_given_name_latin),
+                '{' . 'japaneseGivenName' . '}',
+                ObjectSerializer::toPathValue($japanese_given_name),
                 $resourcePath
             );
         }
@@ -2651,9 +927,9 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNamePinyinBatch
+     * Operation genderJapaneseNamePinyinBatch
      *
-     * Infer the likely gender of up to 100 Chinese names in LATIN (Pinyin).
+     * Infer the likely gender of up to 100 Japanese names in LATIN (Pinyin).
      *
      * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of names, with country code. (optional)
      *
@@ -2661,16 +937,16 @@ class ChineseApi
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\BatchFirstLastNameGenderedOut
      */
-    public function genderChineseNamePinyinBatch($batch_first_last_name_in = null)
+    public function genderJapaneseNamePinyinBatch($batch_first_last_name_in = null)
     {
-        list($response) = $this->genderChineseNamePinyinBatchWithHttpInfo($batch_first_last_name_in);
+        list($response) = $this->genderJapaneseNamePinyinBatchWithHttpInfo($batch_first_last_name_in);
         return $response;
     }
 
     /**
-     * Operation genderChineseNamePinyinBatchWithHttpInfo
+     * Operation genderJapaneseNamePinyinBatchWithHttpInfo
      *
-     * Infer the likely gender of up to 100 Chinese names in LATIN (Pinyin).
+     * Infer the likely gender of up to 100 Japanese names in LATIN (Pinyin).
      *
      * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of names, with country code. (optional)
      *
@@ -2678,9 +954,9 @@ class ChineseApi
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\BatchFirstLastNameGenderedOut, HTTP status code, HTTP response headers (array of strings)
      */
-    public function genderChineseNamePinyinBatchWithHttpInfo($batch_first_last_name_in = null)
+    public function genderJapaneseNamePinyinBatchWithHttpInfo($batch_first_last_name_in = null)
     {
-        $request = $this->genderChineseNamePinyinBatchRequest($batch_first_last_name_in);
+        $request = $this->genderJapaneseNamePinyinBatchRequest($batch_first_last_name_in);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2756,18 +1032,18 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNamePinyinBatchAsync
+     * Operation genderJapaneseNamePinyinBatchAsync
      *
-     * Infer the likely gender of up to 100 Chinese names in LATIN (Pinyin).
+     * Infer the likely gender of up to 100 Japanese names in LATIN (Pinyin).
      *
      * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of names, with country code. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function genderChineseNamePinyinBatchAsync($batch_first_last_name_in = null)
+    public function genderJapaneseNamePinyinBatchAsync($batch_first_last_name_in = null)
     {
-        return $this->genderChineseNamePinyinBatchAsyncWithHttpInfo($batch_first_last_name_in)
+        return $this->genderJapaneseNamePinyinBatchAsyncWithHttpInfo($batch_first_last_name_in)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2776,19 +1052,19 @@ class ChineseApi
     }
 
     /**
-     * Operation genderChineseNamePinyinBatchAsyncWithHttpInfo
+     * Operation genderJapaneseNamePinyinBatchAsyncWithHttpInfo
      *
-     * Infer the likely gender of up to 100 Chinese names in LATIN (Pinyin).
+     * Infer the likely gender of up to 100 Japanese names in LATIN (Pinyin).
      *
      * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of names, with country code. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function genderChineseNamePinyinBatchAsyncWithHttpInfo($batch_first_last_name_in = null)
+    public function genderJapaneseNamePinyinBatchAsyncWithHttpInfo($batch_first_last_name_in = null)
     {
         $returnType = '\OpenAPI\Client\Model\BatchFirstLastNameGenderedOut';
-        $request = $this->genderChineseNamePinyinBatchRequest($batch_first_last_name_in);
+        $request = $this->genderJapaneseNamePinyinBatchRequest($batch_first_last_name_in);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2825,17 +1101,17 @@ class ChineseApi
     }
 
     /**
-     * Create request for operation 'genderChineseNamePinyinBatch'
+     * Create request for operation 'genderJapaneseNamePinyinBatch'
      *
      * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of names, with country code. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function genderChineseNamePinyinBatchRequest($batch_first_last_name_in = null)
+    protected function genderJapaneseNamePinyinBatchRequest($batch_first_last_name_in = null)
     {
 
-        $resourcePath = '/api2/json/genderChineseNamePinyinBatch';
+        $resourcePath = '/api2/json/genderJapaneseNameBatch';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2917,36 +1193,38 @@ class ChineseApi
     }
 
     /**
-     * Operation parseChineseName
+     * Operation japaneseNameKanjiCandidates
      *
-     * Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name)
+     * Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae
      *
-     * @param  string $chinese_name chinese_name (required)
+     * @param  string $japanese_surname_latin japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin japanese_given_name_latin (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\PersonalNameParsedOut
+     * @return \OpenAPI\Client\Model\RomanizedNameOut
      */
-    public function parseChineseName($chinese_name)
+    public function japaneseNameKanjiCandidates($japanese_surname_latin, $japanese_given_name_latin)
     {
-        list($response) = $this->parseChineseNameWithHttpInfo($chinese_name);
+        list($response) = $this->japaneseNameKanjiCandidatesWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin);
         return $response;
     }
 
     /**
-     * Operation parseChineseNameWithHttpInfo
+     * Operation japaneseNameKanjiCandidatesWithHttpInfo
      *
-     * Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name)
+     * Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\PersonalNameParsedOut, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\RomanizedNameOut, HTTP status code, HTTP response headers (array of strings)
      */
-    public function parseChineseNameWithHttpInfo($chinese_name)
+    public function japaneseNameKanjiCandidatesWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin)
     {
-        $request = $this->parseChineseNameRequest($chinese_name);
+        $request = $this->japaneseNameKanjiCandidatesRequest($japanese_surname_latin, $japanese_given_name_latin);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2979,20 +1257,20 @@ class ChineseApi
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\PersonalNameParsedOut' === '\SplFileObject') {
+                    if ('\OpenAPI\Client\Model\RomanizedNameOut' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\PersonalNameParsedOut', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\RomanizedNameOut', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\PersonalNameParsedOut';
+            $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -3011,7 +1289,7 @@ class ChineseApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\PersonalNameParsedOut',
+                        '\OpenAPI\Client\Model\RomanizedNameOut',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3022,18 +1300,19 @@ class ChineseApi
     }
 
     /**
-     * Operation parseChineseNameAsync
+     * Operation japaneseNameKanjiCandidatesAsync
      *
-     * Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name)
+     * Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function parseChineseNameAsync($chinese_name)
+    public function japaneseNameKanjiCandidatesAsync($japanese_surname_latin, $japanese_given_name_latin)
     {
-        return $this->parseChineseNameAsyncWithHttpInfo($chinese_name)
+        return $this->japaneseNameKanjiCandidatesAsyncWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3042,19 +1321,20 @@ class ChineseApi
     }
 
     /**
-     * Operation parseChineseNameAsyncWithHttpInfo
+     * Operation japaneseNameKanjiCandidatesAsyncWithHttpInfo
      *
-     * Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name)
+     * Identify japanese name candidates in KANJI, based on the romanized name ex. Yamamoto Sanae
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function parseChineseNameAsyncWithHttpInfo($chinese_name)
+    public function japaneseNameKanjiCandidatesAsyncWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin)
     {
-        $returnType = '\OpenAPI\Client\Model\PersonalNameParsedOut';
-        $request = $this->parseChineseNameRequest($chinese_name);
+        $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
+        $request = $this->japaneseNameKanjiCandidatesRequest($japanese_surname_latin, $japanese_given_name_latin);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3091,23 +1371,30 @@ class ChineseApi
     }
 
     /**
-     * Create request for operation 'parseChineseName'
+     * Create request for operation 'japaneseNameKanjiCandidates'
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function parseChineseNameRequest($chinese_name)
+    protected function japaneseNameKanjiCandidatesRequest($japanese_surname_latin, $japanese_given_name_latin)
     {
-        // verify the required parameter 'chinese_name' is set
-        if ($chinese_name === null || (is_array($chinese_name) && count($chinese_name) === 0)) {
+        // verify the required parameter 'japanese_surname_latin' is set
+        if ($japanese_surname_latin === null || (is_array($japanese_surname_latin) && count($japanese_surname_latin) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_name when calling parseChineseName'
+                'Missing the required parameter $japanese_surname_latin when calling japaneseNameKanjiCandidates'
+            );
+        }
+        // verify the required parameter 'japanese_given_name_latin' is set
+        if ($japanese_given_name_latin === null || (is_array($japanese_given_name_latin) && count($japanese_given_name_latin) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_given_name_latin when calling japaneseNameKanjiCandidates'
             );
         }
 
-        $resourcePath = '/api2/json/parseChineseName/{chineseName}';
+        $resourcePath = '/api2/json/japaneseNameKanjiCandidates/{japaneseSurnameLatin}/{japaneseGivenNameLatin}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3116,10 +1403,18 @@ class ChineseApi
 
 
         // path params
-        if ($chinese_name !== null) {
+        if ($japanese_surname_latin !== null) {
             $resourcePath = str_replace(
-                '{' . 'chineseName' . '}',
-                ObjectSerializer::toPathValue($chinese_name),
+                '{' . 'japaneseSurnameLatin' . '}',
+                ObjectSerializer::toPathValue($japanese_surname_latin),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($japanese_given_name_latin !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseGivenNameLatin' . '}',
+                ObjectSerializer::toPathValue($japanese_given_name_latin),
                 $resourcePath
             );
         }
@@ -3194,36 +1489,36 @@ class ChineseApi
     }
 
     /**
-     * Operation parseChineseNameBatch
+     * Operation japaneseNameKanjiCandidatesBatch
      *
-     * Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name).
+     * Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto Sanae
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\BatchPersonalNameParsedOut
+     * @return \OpenAPI\Client\Model\BatchNameMatchCandidatesOut
      */
-    public function parseChineseNameBatch($batch_personal_name_in = null)
+    public function japaneseNameKanjiCandidatesBatch($batch_first_last_name_in = null)
     {
-        list($response) = $this->parseChineseNameBatchWithHttpInfo($batch_personal_name_in);
+        list($response) = $this->japaneseNameKanjiCandidatesBatchWithHttpInfo($batch_first_last_name_in);
         return $response;
     }
 
     /**
-     * Operation parseChineseNameBatchWithHttpInfo
+     * Operation japaneseNameKanjiCandidatesBatchWithHttpInfo
      *
-     * Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name).
+     * Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto Sanae
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\BatchPersonalNameParsedOut, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\BatchNameMatchCandidatesOut, HTTP status code, HTTP response headers (array of strings)
      */
-    public function parseChineseNameBatchWithHttpInfo($batch_personal_name_in = null)
+    public function japaneseNameKanjiCandidatesBatchWithHttpInfo($batch_first_last_name_in = null)
     {
-        $request = $this->parseChineseNameBatchRequest($batch_personal_name_in);
+        $request = $this->japaneseNameKanjiCandidatesBatchRequest($batch_first_last_name_in);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3256,20 +1551,20 @@ class ChineseApi
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\BatchPersonalNameParsedOut' === '\SplFileObject') {
+                    if ('\OpenAPI\Client\Model\BatchNameMatchCandidatesOut' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\BatchPersonalNameParsedOut', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\BatchPersonalNameParsedOut';
+            $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -3288,7 +1583,7 @@ class ChineseApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\BatchPersonalNameParsedOut',
+                        '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -3299,18 +1594,18 @@ class ChineseApi
     }
 
     /**
-     * Operation parseChineseNameBatchAsync
+     * Operation japaneseNameKanjiCandidatesBatchAsync
      *
-     * Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name).
+     * Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto Sanae
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function parseChineseNameBatchAsync($batch_personal_name_in = null)
+    public function japaneseNameKanjiCandidatesBatchAsync($batch_first_last_name_in = null)
     {
-        return $this->parseChineseNameBatchAsyncWithHttpInfo($batch_personal_name_in)
+        return $this->japaneseNameKanjiCandidatesBatchAsyncWithHttpInfo($batch_first_last_name_in)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3319,19 +1614,19 @@ class ChineseApi
     }
 
     /**
-     * Operation parseChineseNameBatchAsyncWithHttpInfo
+     * Operation japaneseNameKanjiCandidatesBatchAsyncWithHttpInfo
      *
-     * Infer the likely first/last name structure of a name, ex. 王晓明 -> 王(surname) 晓明(given name).
+     * Identify japanese name candidates in KANJI, based on the romanized name (firstName = japaneseGivenName; lastName=japaneseSurname), ex. Yamamoto Sanae
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function parseChineseNameBatchAsyncWithHttpInfo($batch_personal_name_in = null)
+    public function japaneseNameKanjiCandidatesBatchAsyncWithHttpInfo($batch_first_last_name_in = null)
     {
-        $returnType = '\OpenAPI\Client\Model\BatchPersonalNameParsedOut';
-        $request = $this->parseChineseNameBatchRequest($batch_personal_name_in);
+        $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
+        $request = $this->japaneseNameKanjiCandidatesBatchRequest($batch_first_last_name_in);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3368,17 +1663,17 @@ class ChineseApi
     }
 
     /**
-     * Create request for operation 'parseChineseNameBatch'
+     * Create request for operation 'japaneseNameKanjiCandidatesBatch'
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function parseChineseNameBatchRequest($batch_personal_name_in = null)
+    protected function japaneseNameKanjiCandidatesBatchRequest($batch_first_last_name_in = null)
     {
 
-        $resourcePath = '/api2/json/parseChineseNameBatch';
+        $resourcePath = '/api2/json/japaneseNameKanjiCandidatesBatch';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3389,8 +1684,8 @@ class ChineseApi
 
         // body params
         $_tempBody = null;
-        if (isset($batch_personal_name_in)) {
-            $_tempBody = $batch_personal_name_in;
+        if (isset($batch_first_last_name_in)) {
+            $_tempBody = $batch_first_last_name_in;
         }
 
         if ($multipart) {
@@ -3460,36 +1755,1494 @@ class ChineseApi
     }
 
     /**
-     * Operation pinyinChineseName
+     * Operation japaneseNameLatinCandidates
      *
-     * Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name)
+     * Romanize japanese name, based on the name in Kanji.
      *
-     * @param  string $chinese_name chinese_name (required)
+     * @param  string $japanese_surname_kanji japanese_surname_kanji (required)
+     * @param  string $japanese_given_name_kanji japanese_given_name_kanji (required)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\RomanizedNameOut
+     */
+    public function japaneseNameLatinCandidates($japanese_surname_kanji, $japanese_given_name_kanji)
+    {
+        list($response) = $this->japaneseNameLatinCandidatesWithHttpInfo($japanese_surname_kanji, $japanese_given_name_kanji);
+        return $response;
+    }
+
+    /**
+     * Operation japaneseNameLatinCandidatesWithHttpInfo
+     *
+     * Romanize japanese name, based on the name in Kanji.
+     *
+     * @param  string $japanese_surname_kanji (required)
+     * @param  string $japanese_given_name_kanji (required)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\RomanizedNameOut, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function japaneseNameLatinCandidatesWithHttpInfo($japanese_surname_kanji, $japanese_given_name_kanji)
+    {
+        $request = $this->japaneseNameLatinCandidatesRequest($japanese_surname_kanji, $japanese_given_name_kanji);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\OpenAPI\Client\Model\RomanizedNameOut' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\RomanizedNameOut', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\RomanizedNameOut',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation japaneseNameLatinCandidatesAsync
+     *
+     * Romanize japanese name, based on the name in Kanji.
+     *
+     * @param  string $japanese_surname_kanji (required)
+     * @param  string $japanese_given_name_kanji (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameLatinCandidatesAsync($japanese_surname_kanji, $japanese_given_name_kanji)
+    {
+        return $this->japaneseNameLatinCandidatesAsyncWithHttpInfo($japanese_surname_kanji, $japanese_given_name_kanji)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation japaneseNameLatinCandidatesAsyncWithHttpInfo
+     *
+     * Romanize japanese name, based on the name in Kanji.
+     *
+     * @param  string $japanese_surname_kanji (required)
+     * @param  string $japanese_given_name_kanji (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameLatinCandidatesAsyncWithHttpInfo($japanese_surname_kanji, $japanese_given_name_kanji)
+    {
+        $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
+        $request = $this->japaneseNameLatinCandidatesRequest($japanese_surname_kanji, $japanese_given_name_kanji);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'japaneseNameLatinCandidates'
+     *
+     * @param  string $japanese_surname_kanji (required)
+     * @param  string $japanese_given_name_kanji (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function japaneseNameLatinCandidatesRequest($japanese_surname_kanji, $japanese_given_name_kanji)
+    {
+        // verify the required parameter 'japanese_surname_kanji' is set
+        if ($japanese_surname_kanji === null || (is_array($japanese_surname_kanji) && count($japanese_surname_kanji) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_surname_kanji when calling japaneseNameLatinCandidates'
+            );
+        }
+        // verify the required parameter 'japanese_given_name_kanji' is set
+        if ($japanese_given_name_kanji === null || (is_array($japanese_given_name_kanji) && count($japanese_given_name_kanji) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_given_name_kanji when calling japaneseNameLatinCandidates'
+            );
+        }
+
+        $resourcePath = '/api2/json/japaneseNameLatinCandidates/{japaneseSurnameKanji}/{japaneseGivenNameKanji}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($japanese_surname_kanji !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseSurnameKanji' . '}',
+                ObjectSerializer::toPathValue($japanese_surname_kanji),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($japanese_given_name_kanji !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseGivenNameKanji' . '}',
+                ObjectSerializer::toPathValue($japanese_given_name_kanji),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation japaneseNameLatinCandidatesBatch
+     *
+     * Romanize japanese names, based on the name in KANJI
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in KANJI, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\BatchNameMatchCandidatesOut
+     */
+    public function japaneseNameLatinCandidatesBatch($batch_first_last_name_in = null)
+    {
+        list($response) = $this->japaneseNameLatinCandidatesBatchWithHttpInfo($batch_first_last_name_in);
+        return $response;
+    }
+
+    /**
+     * Operation japaneseNameLatinCandidatesBatchWithHttpInfo
+     *
+     * Romanize japanese names, based on the name in KANJI
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in KANJI, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\BatchNameMatchCandidatesOut, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function japaneseNameLatinCandidatesBatchWithHttpInfo($batch_first_last_name_in = null)
+    {
+        $request = $this->japaneseNameLatinCandidatesBatchRequest($batch_first_last_name_in);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\OpenAPI\Client\Model\BatchNameMatchCandidatesOut' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation japaneseNameLatinCandidatesBatchAsync
+     *
+     * Romanize japanese names, based on the name in KANJI
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in KANJI, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameLatinCandidatesBatchAsync($batch_first_last_name_in = null)
+    {
+        return $this->japaneseNameLatinCandidatesBatchAsyncWithHttpInfo($batch_first_last_name_in)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation japaneseNameLatinCandidatesBatchAsyncWithHttpInfo
+     *
+     * Romanize japanese names, based on the name in KANJI
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in KANJI, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameLatinCandidatesBatchAsyncWithHttpInfo($batch_first_last_name_in = null)
+    {
+        $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
+        $request = $this->japaneseNameLatinCandidatesBatchRequest($batch_first_last_name_in);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'japaneseNameLatinCandidatesBatch'
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal japanese names in KANJI, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function japaneseNameLatinCandidatesBatchRequest($batch_first_last_name_in = null)
+    {
+
+        $resourcePath = '/api2/json/japaneseNameLatinCandidatesBatch';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($batch_first_last_name_in)) {
+            $_tempBody = $batch_first_last_name_in;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation japaneseNameMatch
+     *
+     * Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+     *
+     * @param  string $japanese_surname_latin japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin japanese_given_name_latin (required)
+     * @param  string $japanese_name japanese_name (required)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\RomanizedNameOut
+     */
+    public function japaneseNameMatch($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        list($response) = $this->japaneseNameMatchWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin, $japanese_name);
+        return $response;
+    }
+
+    /**
+     * Operation japaneseNameMatchWithHttpInfo
+     *
+     * Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+     *
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
+     * @param  string $japanese_name (required)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\RomanizedNameOut, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function japaneseNameMatchWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        $request = $this->japaneseNameMatchRequest($japanese_surname_latin, $japanese_given_name_latin, $japanese_name);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\OpenAPI\Client\Model\RomanizedNameOut' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\RomanizedNameOut', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\RomanizedNameOut',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation japaneseNameMatchAsync
+     *
+     * Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+     *
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
+     * @param  string $japanese_name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameMatchAsync($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        return $this->japaneseNameMatchAsyncWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation japaneseNameMatchAsyncWithHttpInfo
+     *
+     * Return a score for matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+     *
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
+     * @param  string $japanese_name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameMatchAsyncWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
+        $request = $this->japaneseNameMatchRequest($japanese_surname_latin, $japanese_given_name_latin, $japanese_name);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'japaneseNameMatch'
+     *
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
+     * @param  string $japanese_name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function japaneseNameMatchRequest($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        // verify the required parameter 'japanese_surname_latin' is set
+        if ($japanese_surname_latin === null || (is_array($japanese_surname_latin) && count($japanese_surname_latin) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_surname_latin when calling japaneseNameMatch'
+            );
+        }
+        // verify the required parameter 'japanese_given_name_latin' is set
+        if ($japanese_given_name_latin === null || (is_array($japanese_given_name_latin) && count($japanese_given_name_latin) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_given_name_latin when calling japaneseNameMatch'
+            );
+        }
+        // verify the required parameter 'japanese_name' is set
+        if ($japanese_name === null || (is_array($japanese_name) && count($japanese_name) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_name when calling japaneseNameMatch'
+            );
+        }
+
+        $resourcePath = '/api2/json/japaneseNameMatch/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($japanese_surname_latin !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseSurnameLatin' . '}',
+                ObjectSerializer::toPathValue($japanese_surname_latin),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($japanese_given_name_latin !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseGivenNameLatin' . '}',
+                ObjectSerializer::toPathValue($japanese_given_name_latin),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($japanese_name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseName' . '}',
+                ObjectSerializer::toPathValue($japanese_name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation japaneseNameMatchBatch
+     *
+     * Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗 with romanized names ex. Yamamoto Sanae
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\BatchNameMatchCandidatesOut
+     */
+    public function japaneseNameMatchBatch($batch_first_last_name_in = null)
+    {
+        list($response) = $this->japaneseNameMatchBatchWithHttpInfo($batch_first_last_name_in);
+        return $response;
+    }
+
+    /**
+     * Operation japaneseNameMatchBatchWithHttpInfo
+     *
+     * Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗 with romanized names ex. Yamamoto Sanae
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\BatchNameMatchCandidatesOut, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function japaneseNameMatchBatchWithHttpInfo($batch_first_last_name_in = null)
+    {
+        $request = $this->japaneseNameMatchBatchRequest($batch_first_last_name_in);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\OpenAPI\Client\Model\BatchNameMatchCandidatesOut' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation japaneseNameMatchBatchAsync
+     *
+     * Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗 with romanized names ex. Yamamoto Sanae
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameMatchBatchAsync($batch_first_last_name_in = null)
+    {
+        return $this->japaneseNameMatchBatchAsyncWithHttpInfo($batch_first_last_name_in)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation japaneseNameMatchBatchAsyncWithHttpInfo
+     *
+     * Return a score for matching a list of Japanese names in KANJI ex. 山本 早苗 with romanized names ex. Yamamoto Sanae
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameMatchBatchAsyncWithHttpInfo($batch_first_last_name_in = null)
+    {
+        $returnType = '\OpenAPI\Client\Model\BatchNameMatchCandidatesOut';
+        $request = $this->japaneseNameMatchBatchRequest($batch_first_last_name_in);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'japaneseNameMatchBatch'
+     *
+     * @param  \OpenAPI\Client\Model\BatchFirstLastNameIn $batch_first_last_name_in A list of personal Japanese names in LATIN, firstName &#x3D; japaneseGivenName; lastName&#x3D;japaneseSurname (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function japaneseNameMatchBatchRequest($batch_first_last_name_in = null)
+    {
+
+        $resourcePath = '/api2/json/japaneseNameMatchBatch';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($batch_first_last_name_in)) {
+            $_tempBody = $batch_first_last_name_in;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation japaneseNameMatchFeedbackLoop
+     *
+     * [CREDITS 1 UNIT] Feedback loop to better perform matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+     *
+     * @param  string $japanese_surname_latin japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin japanese_given_name_latin (required)
+     * @param  string $japanese_name japanese_name (required)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\RomanizedNameOut
+     */
+    public function japaneseNameMatchFeedbackLoop($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        list($response) = $this->japaneseNameMatchFeedbackLoopWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin, $japanese_name);
+        return $response;
+    }
+
+    /**
+     * Operation japaneseNameMatchFeedbackLoopWithHttpInfo
+     *
+     * [CREDITS 1 UNIT] Feedback loop to better perform matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+     *
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
+     * @param  string $japanese_name (required)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\RomanizedNameOut, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function japaneseNameMatchFeedbackLoopWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        $request = $this->japaneseNameMatchFeedbackLoopRequest($japanese_surname_latin, $japanese_given_name_latin, $japanese_name);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\OpenAPI\Client\Model\RomanizedNameOut' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\RomanizedNameOut', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\RomanizedNameOut',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation japaneseNameMatchFeedbackLoopAsync
+     *
+     * [CREDITS 1 UNIT] Feedback loop to better perform matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+     *
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
+     * @param  string $japanese_name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameMatchFeedbackLoopAsync($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        return $this->japaneseNameMatchFeedbackLoopAsyncWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation japaneseNameMatchFeedbackLoopAsyncWithHttpInfo
+     *
+     * [CREDITS 1 UNIT] Feedback loop to better perform matching Japanese name in KANJI ex. 山本 早苗 with a romanized name ex. Yamamoto Sanae
+     *
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
+     * @param  string $japanese_name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function japaneseNameMatchFeedbackLoopAsyncWithHttpInfo($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        $returnType = '\OpenAPI\Client\Model\RomanizedNameOut';
+        $request = $this->japaneseNameMatchFeedbackLoopRequest($japanese_surname_latin, $japanese_given_name_latin, $japanese_name);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'japaneseNameMatchFeedbackLoop'
+     *
+     * @param  string $japanese_surname_latin (required)
+     * @param  string $japanese_given_name_latin (required)
+     * @param  string $japanese_name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function japaneseNameMatchFeedbackLoopRequest($japanese_surname_latin, $japanese_given_name_latin, $japanese_name)
+    {
+        // verify the required parameter 'japanese_surname_latin' is set
+        if ($japanese_surname_latin === null || (is_array($japanese_surname_latin) && count($japanese_surname_latin) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_surname_latin when calling japaneseNameMatchFeedbackLoop'
+            );
+        }
+        // verify the required parameter 'japanese_given_name_latin' is set
+        if ($japanese_given_name_latin === null || (is_array($japanese_given_name_latin) && count($japanese_given_name_latin) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_given_name_latin when calling japaneseNameMatchFeedbackLoop'
+            );
+        }
+        // verify the required parameter 'japanese_name' is set
+        if ($japanese_name === null || (is_array($japanese_name) && count($japanese_name) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $japanese_name when calling japaneseNameMatchFeedbackLoop'
+            );
+        }
+
+        $resourcePath = '/api2/json/japaneseNameMatchFeedbackLoop/{japaneseSurnameLatin}/{japaneseGivenNameLatin}/{japaneseName}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($japanese_surname_latin !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseSurnameLatin' . '}',
+                ObjectSerializer::toPathValue($japanese_surname_latin),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($japanese_given_name_latin !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseGivenNameLatin' . '}',
+                ObjectSerializer::toPathValue($japanese_given_name_latin),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($japanese_name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'japaneseName' . '}',
+                ObjectSerializer::toPathValue($japanese_name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('X-API-KEY');
+        if ($apiKey !== null) {
+            $headers['X-API-KEY'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation parseJapaneseName
+     *
+     * Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
+     *
+     * @param  string $japanese_name japanese_name (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\PersonalNameParsedOut
      */
-    public function pinyinChineseName($chinese_name)
+    public function parseJapaneseName($japanese_name)
     {
-        list($response) = $this->pinyinChineseNameWithHttpInfo($chinese_name);
+        list($response) = $this->parseJapaneseNameWithHttpInfo($japanese_name);
         return $response;
     }
 
     /**
-     * Operation pinyinChineseNameWithHttpInfo
+     * Operation parseJapaneseNameWithHttpInfo
      *
-     * Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name)
+     * Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_name (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\PersonalNameParsedOut, HTTP status code, HTTP response headers (array of strings)
      */
-    public function pinyinChineseNameWithHttpInfo($chinese_name)
+    public function parseJapaneseNameWithHttpInfo($japanese_name)
     {
-        $request = $this->pinyinChineseNameRequest($chinese_name);
+        $request = $this->parseJapaneseNameRequest($japanese_name);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3565,18 +3318,18 @@ class ChineseApi
     }
 
     /**
-     * Operation pinyinChineseNameAsync
+     * Operation parseJapaneseNameAsync
      *
-     * Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name)
+     * Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function pinyinChineseNameAsync($chinese_name)
+    public function parseJapaneseNameAsync($japanese_name)
     {
-        return $this->pinyinChineseNameAsyncWithHttpInfo($chinese_name)
+        return $this->parseJapaneseNameAsyncWithHttpInfo($japanese_name)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3585,19 +3338,19 @@ class ChineseApi
     }
 
     /**
-     * Operation pinyinChineseNameAsyncWithHttpInfo
+     * Operation parseJapaneseNameAsyncWithHttpInfo
      *
-     * Romanize the Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name)
+     * Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function pinyinChineseNameAsyncWithHttpInfo($chinese_name)
+    public function parseJapaneseNameAsyncWithHttpInfo($japanese_name)
     {
         $returnType = '\OpenAPI\Client\Model\PersonalNameParsedOut';
-        $request = $this->pinyinChineseNameRequest($chinese_name);
+        $request = $this->parseJapaneseNameRequest($japanese_name);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3634,23 +3387,23 @@ class ChineseApi
     }
 
     /**
-     * Create request for operation 'pinyinChineseName'
+     * Create request for operation 'parseJapaneseName'
      *
-     * @param  string $chinese_name (required)
+     * @param  string $japanese_name (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function pinyinChineseNameRequest($chinese_name)
+    protected function parseJapaneseNameRequest($japanese_name)
     {
-        // verify the required parameter 'chinese_name' is set
-        if ($chinese_name === null || (is_array($chinese_name) && count($chinese_name) === 0)) {
+        // verify the required parameter 'japanese_name' is set
+        if ($japanese_name === null || (is_array($japanese_name) && count($japanese_name) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $chinese_name when calling pinyinChineseName'
+                'Missing the required parameter $japanese_name when calling parseJapaneseName'
             );
         }
 
-        $resourcePath = '/api2/json/pinyinChineseName/{chineseName}';
+        $resourcePath = '/api2/json/parseJapaneseName/{japaneseName}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -3659,10 +3412,10 @@ class ChineseApi
 
 
         // path params
-        if ($chinese_name !== null) {
+        if ($japanese_name !== null) {
             $resourcePath = str_replace(
-                '{' . 'chineseName' . '}',
-                ObjectSerializer::toPathValue($chinese_name),
+                '{' . 'japaneseName' . '}',
+                ObjectSerializer::toPathValue($japanese_name),
                 $resourcePath
             );
         }
@@ -3737,36 +3490,36 @@ class ChineseApi
     }
 
     /**
-     * Operation pinyinChineseNameBatch
+     * Operation parseJapaneseNameBatch
      *
-     * Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name).
+     * Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of Chinese names (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\BatchPersonalNameParsedOut
      */
-    public function pinyinChineseNameBatch($batch_personal_name_in = null)
+    public function parseJapaneseNameBatch($batch_personal_name_in = null)
     {
-        list($response) = $this->pinyinChineseNameBatchWithHttpInfo($batch_personal_name_in);
+        list($response) = $this->parseJapaneseNameBatchWithHttpInfo($batch_personal_name_in);
         return $response;
     }
 
     /**
-     * Operation pinyinChineseNameBatchWithHttpInfo
+     * Operation parseJapaneseNameBatchWithHttpInfo
      *
-     * Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name).
+     * Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of Chinese names (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\BatchPersonalNameParsedOut, HTTP status code, HTTP response headers (array of strings)
      */
-    public function pinyinChineseNameBatchWithHttpInfo($batch_personal_name_in = null)
+    public function parseJapaneseNameBatchWithHttpInfo($batch_personal_name_in = null)
     {
-        $request = $this->pinyinChineseNameBatchRequest($batch_personal_name_in);
+        $request = $this->parseJapaneseNameBatchRequest($batch_personal_name_in);
 
         try {
             $options = $this->createHttpClientOption();
@@ -3842,18 +3595,18 @@ class ChineseApi
     }
 
     /**
-     * Operation pinyinChineseNameBatchAsync
+     * Operation parseJapaneseNameBatchAsync
      *
-     * Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name).
+     * Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of Chinese names (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function pinyinChineseNameBatchAsync($batch_personal_name_in = null)
+    public function parseJapaneseNameBatchAsync($batch_personal_name_in = null)
     {
-        return $this->pinyinChineseNameBatchAsyncWithHttpInfo($batch_personal_name_in)
+        return $this->parseJapaneseNameBatchAsyncWithHttpInfo($batch_personal_name_in)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -3862,19 +3615,19 @@ class ChineseApi
     }
 
     /**
-     * Operation pinyinChineseNameBatchAsyncWithHttpInfo
+     * Operation parseJapaneseNameBatchAsyncWithHttpInfo
      *
-     * Romanize a list of Chinese name to Pinyin, ex. 王晓明 -> Wang (surname) Xiaoming (given name).
+     * Infer the likely first/last name structure of a name, ex. 山本 早苗 or Yamamoto Sanae
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of Chinese names (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function pinyinChineseNameBatchAsyncWithHttpInfo($batch_personal_name_in = null)
+    public function parseJapaneseNameBatchAsyncWithHttpInfo($batch_personal_name_in = null)
     {
         $returnType = '\OpenAPI\Client\Model\BatchPersonalNameParsedOut';
-        $request = $this->pinyinChineseNameBatchRequest($batch_personal_name_in);
+        $request = $this->parseJapaneseNameBatchRequest($batch_personal_name_in);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -3911,17 +3664,17 @@ class ChineseApi
     }
 
     /**
-     * Create request for operation 'pinyinChineseNameBatch'
+     * Create request for operation 'parseJapaneseNameBatch'
      *
-     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of Chinese names (optional)
+     * @param  \OpenAPI\Client\Model\BatchPersonalNameIn $batch_personal_name_in A list of personal names (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function pinyinChineseNameBatchRequest($batch_personal_name_in = null)
+    protected function parseJapaneseNameBatchRequest($batch_personal_name_in = null)
     {
 
-        $resourcePath = '/api2/json/pinyinChineseNameBatch';
+        $resourcePath = '/api2/json/parseJapaneseNameBatch';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
